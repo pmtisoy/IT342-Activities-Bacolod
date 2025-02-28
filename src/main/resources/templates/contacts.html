@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Contacts</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Google Contacts</h1>
+
+<div th:if="${contacts.empty}">
+    <p>No contacts found.</p>
+</div>
+
+<div th:unless="${contacts.empty}">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contact : ${contacts}">
+            <td th:text="${contact.names != null && !contact.names.isEmpty() ? contact.names[0].displayName : ''}"></td>
+            <td th:text="${contact.emailAddresses != null && !contact.emailAddresses.isEmpty() ? contact.emailAddresses[0].value : ''}"></td>
+            <td th:text="${contact.phoneNumbers != null && !contact.phoneNumbers.isEmpty() ? contact.phoneNumbers[0].value : ''}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
