@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class peopleService {
@@ -26,7 +25,7 @@ public class peopleService {
     @Autowired
     private OAuth2AuthorizedClientService authorizedClientService;
 
-    public List<String> getContacts(OAuth2AuthenticationToken authentication) throws IOException, GeneralSecurityException {
+    public List<Person> getContacts(OAuth2AuthenticationToken authentication) throws IOException, GeneralSecurityException {
         OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
                 authentication.getAuthorizedClientRegistrationId(), authentication.getName());
 
@@ -42,32 +41,22 @@ public class peopleService {
         GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken.getTokenValue());
 
         PeopleService peopleService = new PeopleService.Builder(httpTransport, jsonFactory, credential)
-                .setApplicationName("Oauth")
+                .setApplicationName("Oauth") // Replace with your app name
                 .build();
 
         ListConnectionsResponse response = peopleService.people().connections()
                 .list("people/me")
-                .setPersonFields("names,emailAddresses")
+                .setPersonFields("names,emailAddresses,phoneNumbers") // Include phone numbers
                 .execute();
 
         List<Person> connections = response.getConnections();
 
         if (connections == null || connections.isEmpty()) {
-            return List.of("No contacts found.");
+            return List.of(); // Return an empty list
         }
+        else{
 
-        return connections.stream()
-                .map(person -> {
-                    StringBuilder contactInfo = new StringBuilder();
-                    if (person.getNames() != null && !person.getNames().isEmpty()) {
-                        contactInfo.append(person.getNames().get(0).getDisplayName()).append(" ");
-                    }
-                    if (person.getEmailAddresses() != null && !person.getEmailAddresses().isEmpty()) {
-                        contactInfo.append("(").append(person.getEmailAddresses().get(0).getValue()).append(")");
-                    }
-                    return contactInfo.toString().trim();
-                })
-                .collect(Collectors.toList());
-
+        return connections; // Return the list of Person objects
+        }
     }
 }
