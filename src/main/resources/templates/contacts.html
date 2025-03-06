@@ -23,11 +23,10 @@
 </head>
 <body>
 <h1>Google Contacts</h1>
-
+<a href="/addContact"><button>Add Contact</button></a>
 <div th:if="${contacts.empty}">
     <p>No contacts found.</p>
 </div>
-
 <div th:unless="${contacts.empty}">
     <table>
         <thead>
@@ -35,6 +34,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +42,10 @@
             <td th:text="${contact.names != null && !contact.names.isEmpty() ? contact.names[0].displayName : ''}"></td>
             <td th:text="${contact.emailAddresses != null && !contact.emailAddresses.isEmpty() ? contact.emailAddresses[0].value : ''}"></td>
             <td th:text="${contact.phoneNumbers != null && !contact.phoneNumbers.isEmpty() ? contact.phoneNumbers[0].value : ''}"></td>
+            <td>
+                <a th:href="@{/editContact/{resourceName}(resourceName=${contact.resourceName})}">Edit</a>
+                <a th:href="@{/deleteContact/{resourceName}(resourceName=${contact.resourceName})}">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
