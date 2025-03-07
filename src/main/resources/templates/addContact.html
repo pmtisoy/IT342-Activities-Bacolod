@@ -2,20 +2,88 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Contact</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #e0f2fe; /* Light blue background */
+            color: #1e3a8a; /* Dark blue text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2563eb; /* Brighter blue header */
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #dbeafe; /* Lighter blue form background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Adjust width as needed */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #374151; /* Darker grey label */
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #93c5fd; /* Blue border */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #2563eb; /* Brighter blue button */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1d4ed8; /* Slightly darker blue on hover */
+        }
+
+        p {
+            margin-top: 20px;
+            color: #2563eb; /* Blue message text */
+            font-weight: bold;
+        }
+
+        center{
+            width: 100%;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Add Contact</h1>
-    <form action="/addContact" method="post">
-        <label for="firstName">First Name:</label><br>
-        <input type="text" id="firstName" name="firstName"><br><br>
-        <label for="lastName">Last Name:</label><br>
-        <input type="text" id="lastName" name="lastName"><br><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br><br>
-        <label for="phoneNumber">Phone Number:</label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber"><br><br>
-        <input type="submit" value="Add Contact">
-    </form>
-    <p th:if="${message}" th:text="${message}"></p>
+<h1><center>Add Contact</center></h1>
+<form action="/addContact" method="post">
+    <label for="firstName">First Name:</label><br>
+    <input type="text" id="firstName" name="firstName"><br><br>
+    <label for="lastName">Last Name:</label><br>
+    <input type="text" id="lastName" name="lastName"><br><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br><br>
+    <label for="phoneNumber">Phone Number:</label><br>
+    <input type="text" id="phoneNumber" name="phoneNumber"><br><br>
+    <input type="submit" value="Add Contact">
+</form>
+<p th:if="${message}" th:text="${message}"></p>
 </body>
 </html>

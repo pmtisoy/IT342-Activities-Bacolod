@@ -6,24 +6,69 @@
     <style>
         body {
             font-family: sans-serif;
+            background-color: #e0f2fe; /* Light blue background */
+            color: #1e3a8a; /* Dark blue text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2563eb; /* Brighter blue header */
+            margin-bottom: 20px;
         }
         table {
-            width: 100%;
+            width: 90%; /* Adjusted width */
             border-collapse: collapse;
+            background-color: #dbeafe; /* Lighter blue table background */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid #93c5fd; /* Blue border */
+            padding: 12px;
             text-align: left;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #bfdbfe; /* Slightly darker table header */
+            color: #374151; /* Darker grey header text */
         }
+        a {
+            color: #2563eb; /* Blue link color */
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background-color: #2563eb; /* Brighter blue button */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1d4ed8; /* Slightly darker blue on hover */
+        }
+        p {
+            color: #2563eb;
+            font-weight: bold;
+        }
+        center{
+            width: 100%;
+        }
+
     </style>
 </head>
 <body>
-<h1>Google Contacts</h1>
-<a href="/addContact"><button>Add Contact</button></a>
+<h1><center>Google Contacts</center></h1>
+
 <div th:if="${contacts.empty}">
     <p>No contacts found.</p>
 </div>
@@ -49,6 +94,8 @@
         </tr>
         </tbody>
     </table>
+    <br><br>
+    <a href="/addContact"><button>Add Contact</button></a>
 </div>
 </body>
 </html>

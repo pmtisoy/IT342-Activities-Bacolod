@@ -21,7 +21,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    private peopleService peopleService;
+    public peopleService peopleService;
 
     @GetMapping
     public String index() {
@@ -62,17 +62,17 @@ public class UserController {
         return "editContact";
     }
 
-    @PostMapping("/editContact/{resourceName}")
-    public String editContact(OAuth2AuthenticationToken authentication, @PathVariable String resourceName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String phoneNumber, Model model) throws IOException, GeneralSecurityException {
-        peopleService.updateContact(authentication, resourceName, firstName, lastName, email, phoneNumber);
-        model.addAttribute("message", "Contact updated successfully!");
-        return "redirect:/contacts";
-    }
+//    @PostMapping("/editContact/{resourceName}")
+//    public String editContact(OAuth2AuthenticationToken authentication, @PathVariable String resourceName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String phoneNumber, Model model) throws IOException, GeneralSecurityException {
+//        peopleService.updateContact(authentication, resourceName, firstName, lastName, email, phoneNumber);
+//        model.addAttribute("message", "Contact updated successfully!");
+//        return "redirect:/contacts";
+//    }
 
-    @GetMapping("/deleteContact/{resourceName}")
-    public String deleteContact(OAuth2AuthenticationToken authentication, @PathVariable String resourceName) throws IOException, GeneralSecurityException {
-        peopleService.deleteContact(authentication, resourceName);
-        return "redirect:/contacts";
-    }
+//    @GetMapping("/deleteContact/{resourceName}")
+//    public String deleteContact(OAuth2AuthenticationToken authentication, @PathVariable String resourceName) throws IOException, GeneralSecurityException {
+//        peopleService.deleteContact(authentication, resourceName);
+//        return "redirect:/contacts";
+//    }
 
 }

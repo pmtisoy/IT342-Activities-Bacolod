@@ -22,7 +22,7 @@ import java.util.List;
 public class peopleService {
 
     @Autowired
-    private OAuth2AuthorizedClientService authorizedClientService;
+    public OAuth2AuthorizedClientService authorizedClientService;
 
     public List<Person> getContacts(OAuth2AuthenticationToken authentication) throws IOException, GeneralSecurityException {
         OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
@@ -70,38 +70,38 @@ public class peopleService {
         person.setEmailAddresses(Arrays.asList(emailAddress));
         person.setPhoneNumbers(Arrays.asList(phone));
 
-        return peopleService.people().createPerson(person).execute();
+        return peopleService.people().createContact(person).execute();
     }
 
-    public Person updateContact(OAuth2AuthenticationToken authentication, String resourceName, String firstName, String lastName, String email, String phoneNumber) throws IOException, GeneralSecurityException {
-        OAuth2AuthorizedClient authorizedClient = getAuthorizedClient(authentication);
-        PeopleService peopleService = getPeopleService(authorizedClient);
+//    public Person updateContact(OAuth2AuthenticationToken authentication, String resourceName, String firstName, String lastName, String email, String phoneNumber) throws IOException, GeneralSecurityException {
+//        OAuth2AuthorizedClient authorizedClient = getAuthorizedClient(authentication);
+//        PeopleService peopleService = getPeopleService(authorizedClient);
+//
+//        Person person = peopleService.people().get(resourceName).setPersonFields("names,emailAddresses,phoneNumbers").execute();
+//
+//        Name name = new Name().setGivenName(firstName).setFamilyName(lastName);
+//        EmailAddress emailAddress = new EmailAddress().setValue(email);
+//        PhoneNumber phone = new PhoneNumber().setValue(phoneNumber);
+//
+//        person.setNames(Arrays.asList(name));
+//        person.setEmailAddresses(Arrays.asList(emailAddress));
+//        person.setPhoneNumbers(Arrays.asList(phone));
+//
+//        UpdatePerson updatePerson = new UpdatePerson();
+//        updatePerson.setPerson(person);
+//        updatePerson.setUpdatePersonFields("names,emailAddresses,phoneNumbers");
+//
+//        return peopleService.people().updatePerson(resourceName, updatePerson).execute();
+//    }
 
-        Person person = peopleService.people().get(resourceName).setPersonFields("names,emailAddresses,phoneNumbers").execute();
+//    public void deleteContact(OAuth2AuthenticationToken authentication, String resourceName) throws IOException, GeneralSecurityException {
+//        OAuth2AuthorizedClient authorizedClient = getAuthorizedClient(authentication);
+//        PeopleService peopleService = getPeopleService(authorizedClient);
+//
+//        peopleService.people().deletePerson(resourceName).execute();
+//    }
 
-        Name name = new Name().setGivenName(firstName).setFamilyName(lastName);
-        EmailAddress emailAddress = new EmailAddress().setValue(email);
-        PhoneNumber phone = new PhoneNumber().setValue(phoneNumber);
-
-        person.setNames(Arrays.asList(name));
-        person.setEmailAddresses(Arrays.asList(emailAddress));
-        person.setPhoneNumbers(Arrays.asList(phone));
-
-        UpdatePerson updatePerson = new UpdatePerson();
-        updatePerson.setPerson(person);
-        updatePerson.setUpdatePersonFields("names,emailAddresses,phoneNumbers");
-
-        return peopleService.people().updatePerson(resourceName, updatePerson).execute();
-    }
-
-    public void deleteContact(OAuth2AuthenticationToken authentication, String resourceName) throws IOException, GeneralSecurityException {
-        OAuth2AuthorizedClient authorizedClient = getAuthorizedClient(authentication);
-        PeopleService peopleService = getPeopleService(authorizedClient);
-
-        peopleService.people().deletePerson(resourceName).execute();
-    }
-
-    private OAuth2AuthorizedClient getAuthorizedClient(OAuth2AuthenticationToken authentication) {
+    public OAuth2AuthorizedClient getAuthorizedClient(OAuth2AuthenticationToken authentication) {
         return authorizedClientService.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
     }
 
